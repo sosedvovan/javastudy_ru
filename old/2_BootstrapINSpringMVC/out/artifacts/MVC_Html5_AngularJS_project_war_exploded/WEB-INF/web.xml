@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>mvc-html5-angularjs</display-name>
+    
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            WEB-INF/config/application-context.xml
+        </param-value>
+    </context-param>
+
+<!--    два базовых листенера-->
+<!--    Для секьюрити. В лисенере прописывается спринг секьюрити конфигурация, а в диспатчере бины из spring mvc.
+        Т.о. бины из приложения могут использовать бины для секьюрити, но не наоборот-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+<!--    один сервлет и его маппин-->
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+<!--            указываем на первоначальный файл конфигурации контекста-->
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/config/mvc-config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+<!--    страница входа в приложение-->
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/view/index.jsp</welcome-file>
+    </welcome-file-list>
+
+<!--    страница ошибок-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/view/error/errorpage.jsp</location>
+    </error-page>
+    
+</web-app>
+
+<!-- Первоначально был создан обычный Мавен проект. Делаем из него web проект:
+ Нажимаем правой кнопкой на проект и выбираем Add Framework Support... Далее выбираем Web Application Spring.
+ Если в maven зависимость подгрузилась, то идея укажет на нее в поле справа. На самом деле от того,
+ что вы выберите зависит какие xml файлы автоматически будут добавлены в проект. В целом это можно сделать и руками,
+ но так гораздо удобнее и потом идея подхватит их и будет удобно навигироваться. В нашем случае будут добавлены файлы
+ конфигурации спринг и этот web.xml файл.-->
+
+<!--Небольшое отступление — обратите внимание, что в проекте пакет web был переименован в webapp
+ (стандартная структура веб проекта). Это необходимо учесть в Project Structure (ctrl+alt+shift+s)
+ и поменять путь к корню веб приложения.-->
+
+<!--Здесь добавлены два базовых листенера, один сервлет и его маппинг,
+а так же страница входа в приложение и страница ошибок-->
+
+<!-- про листенеры-->
+<!--https://qna.habr.com/q/293512-->
+<!--https://russianblogs.com/article/4833830035/-->

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+	   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- context:component-scan This tag will scan @Component, @Repository, @Service, @Controller
+         and also resolves @Autowired and @Qualifier -->
+<!--    включаем поиск классов с аннотациями, вроде @Component по указанным пакетам.
+        На самом деле в этой части она не нужна (у нас еще нет ни одного Java класса).-->
+    <context:component-scan base-package="ru.javastudy.mvcHtml5Angular.mvc" />
+
+<!--    делаем бин ViewResolver — кот. используется при возврате модели из спринг бина-->
+<!--    для того, чтобы из метода контроллера возвращать только имя вьюхи- без префикса и суффикс html автоматом менялся На jsp-->
+<!--    Например в теге <mvc:view-controller> для /about.html произойдет такой поиск — к префиксу добавится указанный view-name
+        и добавиться суффикс. Т.е. /WEB-INF/view/about/about.jsp.-->
+
+<!--    Диспетчер сервлетов DisptacherServlet Spring’а с помощью ViewResolver определяет какое представление
+        необходимо использовать на основании полученного имени-->
+<!--    ViewResolver — интерфейс, реализуемый объектами, которые способны находить представления View по имени View Name.-->
+<!--    по префиксу и суффиксу  DisptacherServlet легко находит этот файл вьюхи-->
+
+<!--    сначала DisptacherServlet посылает запрос в нужный контроллер, потом-->
+<!--    из контроллера братно в DisptacherServlet посылается ModelAndView-->
+<!--    Диспатчер сервлет на основании полученного ModelAndView ищет какое представление ему использовать
+        (View Resolver) и получает в ответе имя представления View-->
+
+<!--    После того как в модель modelAndView было записано имя представления viewName = ‘index’ и произошел выход из метода контроллера,
+        то в действие включается ViewResolver. согласно этим настройкам  класс InternalResourceViewResolver будет искать представление
+        с именем index, у которого префикс /WEB-INF/views/, а суффикс .jsp. Другими словами он должен найти представление
+        с именем /WEB-INF/views/index.jsp. -->
+<!--    подробнее https://javastudy.ru/spring-mvc/spring-mvc-viewresolver/-->
+
+    <!-- ViewResolver bean config for mapping strings to jsp views -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
+        <property name="order" value="1" />
+        <property name="prefix" value="/WEB-INF/view" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+<!-- настройки ViewResolver используем в теге <mvc:view-controller> -->
+<!--    view-controller — с помощью viewResolver перенаправит пользователя перешедшего по ссылке в представление.
+        Например для /about.html произойдет такой поиск — к префиксу добавится указанный view-name и добавиться суффикс.
+        Т.е. /WEB-INF/view/about/about.jsp.-->
+<!--    те из метода контроллера мы возвращаем return "/about.html", а  DisptacherServlet ищет файл /WEB-INF/view/about/about.jsp-->
+<!--    или из метода контроллера мы возвращаем return "/index.html" а  DisptacherServlet ищет файл /WEB-INF/view/index.jsp-->
+    <mvc:view-controller path="/about.html" view-name="/about/about"/>
+    <mvc:view-controller path="/index.html" view-name="/index"/>
+
+
+</beans>
+
+<!-- в этом файле настройки, относящиеся к web-mvc, а не ко всему web приложению-->

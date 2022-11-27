@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+	   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- context:component-scan This tag will scan @Component, @Repository, @Service, @Controller
+         and also resolves @Autowired and @Qualifier -->
+    <context:component-scan base-package="ru.javastudy.mvcHtml5Angular.mvc" />
+
+    <!--
+        mvc:annotation-driven configures Spring MVC annotations
+        Support for validating @Controller inputs with @Valid, if a JSR-303 Provider is present on the classpath.
+        HttpMessageConverter support for @RequestBody method parameters and @ResponseBody method return values
+        from @RequestMapping or @ExceptionHandler methods.
+
+        mvc:annotation-driven настраивает аннотации Spring MVC
+        Поддержка проверки входных данных @Controller с помощью @Valid, если в пути к классам присутствует поставщик JSR-303.
+        Поддержка HttpMessageConverter для параметров метода @RequestBody и возвращаемых значений метода @ResponseBody
+        из методов @RequestMapping или @ExceptionHandler.
+
+        Обратите внимание, что относительно предыдущей части была добавлена
+        строчка <mvc:annotation-driven/>, которая «включит» наши @Component бины.
+     -->
+    <mvc:annotation-driven/>
+
+<!-- этот бин с прошлой части-->
+    <!-- ViewResolver bean config for mapping strings to jsp views -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
+        <property name="order" value="1" />
+        <property name="prefix" value="/WEB-INF/view/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!-- File Upload bean config-->
+<!--  Для загрузки файлов нам понадобится прописать в mvc-config.xml интерфейс MultipartResolver. -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- set the maximum file size in bytes -->
+        <property name="maxUploadSize" value="1000000"/>
+    </bean>
+
+    <!--Excel and PDF xml view configuration -->
+<!--  Для создания pdf, excel документов был добавлен отдельный xml конфигурационный файл
+      и с помощью XmlViewResolver был подключен к конфигурации спринг-->
+    <bean class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="order" value="0" />
+        <property name="location">
+            <value>/WEB-INF/config/excel-pdf-config.xml</value>
+        </property>
+    </bean>
+
+    <!-- эти настройки с прошлой части + добавили "/file.html" (здесь диспатчеру говорим из каких файлов html
+         делать jsp  и брать их для отображения)-->
+    <mvc:view-controller path="/index.html" view-name="/index"/>
+    <mvc:view-controller path="/about.html" view-name="/about/about"/>
+    <mvc:view-controller path="/file.html" view-name="/file/file"/>
+
+
+</beans>

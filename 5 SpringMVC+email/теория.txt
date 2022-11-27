@@ -1,0 +1,37 @@
+Spring MVC и email. Отправка электронной почты (email) с помощью Apache Velocity Templates
+Отправка электронной почты (email) с помощью Spring MVC и Apache Velocity Templates.
+
+Используемые технологии и библиотеки
+Spring MVC 4.2.4.Release
+Apache Velocity 1.7
+Maven 3.2.5
+IntelliJ IDEA 15.0.2
+1. Описание задачи
+Научиться отправлять электронную почту из веб приложения на Spring MVC с помощью
+встроенных классов из пакета org.springframework.mail.javamail и популярного
+процессора шаблонов — Apache Velocity.
+В этом проекте используются java классы для работы с почтой (EmailController,
+EmailModel, EmailService), шаблон электронного письма (registered.vm) и
+страница в нашем веб приложении (email.jsp).
+Для работы с электронной почтой нам понадобится подключить дополнительные библиотеки
+спринг (артефакт spring-context-support), в которых находится пакет
+org.springframework.mail.javamail. Также подключим библиотеку для
+генерации шаблонов писем и стандартную библиотеку javax.mail:
+<!--Contains org.springframework.mail.javamail-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
+
+        <!-- Spring MVC Mail Related Dependency -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>

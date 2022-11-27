@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+	   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd ">
+
+<!--    папку config для этих 2-х файлов создаем след образом:
+пкм по WEB_INF -> new -> XML Config... file ->
+ -> Spring Config -> введем название папки config
+ далее указать в Project Structure эти два файла:
+               + Spring + ...-->
+
+
+<!--    Здесь только указан путь к статическим ресурсам. В комментарии показано как можно подключать
+другие ресурсы, например темы.-->
+    <!-- Static Resources Configuration (get access to static sources such as CSS and JavaScript files) -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <!-- themes can be put in different folder such as
+        <mvc:resources mapping="/resources/**" location="/resources/themeBlue" />
+        <mvc:resources mapping="/resources/**" location="/resources/themeGreen" />
+     -->
+
+<!--    Для начала работы с JDBC нам необходимо прописать в этом конфигурационном файле Spring бин для
+        работы с базой данных и источник этих данных.
+        property-placeholder указывает где нужно искать файл со свойствами (будет приведен чуть ниже).
+        Эти свойства используются в описании бина id=dataSource.
+         В свойствах указываются стандартные настройки вроде логина, драйвера для работы с БД
+         и путь к ней. Ниже прописан путь к самим данным
+         (dbschema.sql — скрипты создания БД, test-data.sql — сами данные)-->
+    <!--find property file. See bean id='dataSource' for example ${jdbc.hsqldb.driverClass}-->
+    <context:property-placeholder location="classpath:util.properties" />
+    <!-- XML Bean Definitions -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.hsqldb.driverClass}" />
+        <property name="url" value="${jdbc.hsqldb.url}" />
+        <property name="username" value="${jdbc.hsqldb.username}" />
+        <property name="password" value="${jdbc.hsqldb.password}" />
+    </bean>
+    <!-- initialize Embedded DataSource. Встроенная база данных-->
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:dbschema.sql"/>
+        <jdbc:script location="classpath:test-data.sql"/>
+    </jdbc:initialize-database>
+
+
+</beans>
+
+<!--3.5. Файл конфигурации Spring
+Небольшое отступление — обратите внимание, что в проекте
+пакет web был переименован в webapp (стандартная структура веб проекта).
+Это необходимо учесть в Project Structure (ctrl+alt+shift+s) и поменять путь к корню
+веб приложения. в фасетах в нижней текстареа-->
+<!--Теперь настроим Spring. Для этого в приложении используются два конфигурационных
+файла: application-context.xml и mvc-config.xml. В первом будут указывать
+настройки для всего приложения, во втором — только относящиеся к web-mvc.
+Назвать их можно как угодно, но рекомендую разделять их примерно таким образом
+(кстати это не обязательно и всё можно держать вообще в одном файле, но с
+ростом проекта могут возникнуть сложности поддержки).-->

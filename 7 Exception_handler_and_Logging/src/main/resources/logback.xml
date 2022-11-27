@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--В самом начале логер будет искать этот конфигурационный файл и будет с ним связан.-->
+<!-- configuration file for LogBack (slf4J implementation)
+See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/ -->
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+    <!--Write logs in this file -->
+<!--    Здесь задается свойство, которое будет использовано
+как указание пути расположения файла с логами на диске-->
+    <property name="LOG_HOME" value="C:/javastudy_ru"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%-5level %logger{0} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Logging -->
+<!--    Далее идет указание к какому файлу будут прикрепляться логи
+(файл error.log) и какой будет для этого использован шаблон записи-->
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+<!--        <file>${LOG_HOME}/error.log</file>-->
+        <file>${LOG_HOME}/error.log</file>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%-5level %logger{0} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+<!--Чуть ниже выставлен уровень debug. (Здесь так же закомментировано логирование для Hibernate,
+если хотите — можете раскоментить и посмотреть предыдущую тему по настройке ORM Hibernate).-->
+<!--    <logger name="org.hibernate" level="debug"/>-->
+<!--    Uncomment and add your logger here:-->
+<!-- <logger name="org.springframework.samples.service.service" level="debug"/>-->
+
+<!--    В конце прописано куда будут записываться логи (если не хотите записи в файл или консоль,
+то закомментируйте\удалите соответствующую строчку, например для записи в файл <appender-ref ref=»file»/>-->
+    <root level="info">
+        <!-- uncomment file-->
+        <!--If you want to write to file - uncomment it-->
+        <appender-ref ref="file"/>
+        <appender-ref ref="console"/>
+    </root>
+
+<!--    <logger name="ru.javastudy.mvcHtml5Angular" level="debug"/>-->
+
+</configuration>
