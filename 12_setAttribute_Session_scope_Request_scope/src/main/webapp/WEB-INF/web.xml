@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>mvc-html5-angularjs</display-name>
+
+<!--    про сервлеты
+https://metanit.com/java/javaee/4.1.php
+Поскольку для обработки всех запросов создается в томкате один
+экземпляр сервлета, и все обращения к нему идут в отдельных
+потоках, то не рекомендуется в классе сервлета объявлять
+и использовать глобальные переменные, так как они не будут
+потокобезопасными.-->
+
+<!--    см ниже  Параметры инициализации сервлетов.
+ <param-value> будет доступен всем сервлетам в приложении
+ по ключу <param-name>
+ здесь мы ссылаемся на него в <servlet>...</servlet>-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            WEB-INF/config/application-context.xml
+        </param-value>
+    </context-param>
+
+<!--    см ниже-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+<!--    сервлета-->
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/config/mvc-config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!--  маппинг сервлеты-->
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!--Позволяет работать с русскими символами-->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+<!--  Когда кто-либо переходит на сайт, то происходит следующее
+
+http://localhost:8080 превращается в http://localhost:8080/
+Сервер не находит ничего полезного для отображения и должен вывести ошибку,
+но у нас настроен welcome-file-list, значит, как описано выше сначала должен
+быть обработан этот атрибут.
+http://localhost:8080/ — это уже директория и начинается сканирование
+по welcome-file-list
+http://yoursite.com//WEB-INF/view/index.jsp — первый в списке сканирования
+а значит он вступает в работу.
+ + см ниже-->
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/view/index.jsp</welcome-file>
+    </welcome-file-list>
+
+<!--    эту страницу покажем при ошибке на сервере
+В данном случае элемент error-code указывает, что мы будем обрабатывать
+ошибки со статусным кодом 404 (то есть такие ошибки, которые подразумевают
+отсутствие ресурса на сервере). А элемент location указывает, что в случае
+обращения к несуществующему ресурсу пользователю будет отправляться
+страница 404.html.-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/view/error/errorpage.jsp</location>
+    </error-page>
+    
+</web-app>
+
+<!--Здесь добавлены два базовых листенера, один сервлет и его маппинг,
+а так же страница входа в приложение и страница ошибок.-->
+<!--Настройка начальной страницы c помощью <welcome-file-list>
+При запуске приложения можно задать начальную страницу, на которую перейдет браузер.
+Частая проблема, что при загрузке сервера приложений мы получаем 404 ошибку —
+страница не найдена. Давайте разберемся как нужно настраивать файл web.xml
+веб-приложения.
+
+
+
+
+Когда URL сайта представляет путь для статичных файлов в вашем WAR, то часто
+хорошей идеей будет настройка атрибута <welcome-file-list> (например для начальной
+страницы авторизации). Пользователь находящийся на странице
+/help/accounts/password.xhtml может попытаться перейти на /help/accounts/
+для доступа к закрытой информации. Дескриптор развертывания может задать список имен,
+которые должен перепробовать сервер, когда пользователь обращается к пути из
+подкаталога WAR (который неявно обрабатывается сервлетом), прежде чем выдать
+ошибку URL не найден.
+
+К примеру, если пользователь попытается перейти по пути  /help/accounts/,
+то следующие настройки <welcome-file-list> заставят сервер проверить
+/help/accounts/index.xhtml и  /help/accounts/index.html,
+прежде чем вывести 404 ошибку:
+  <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+В первую очередь нужно учесть, что папка WEB-INF/ используется для внутренних
+файлов (те же настройки и т.п.) и НЕ доступна извне. Т.е. начальную страницу можно
+хранить только вне этой папки. Например в webapp/folder/index.xhtml — можно,
+а в webapp/WEB-INF/folder/index.xhtml — нельзя.
+ |- META-INF
+ |- WEB-INF
+ |    - web.xml
+ `- index.xhtml</span>
+
+ Например у нас есть сервлет с полным именем com.examplecompany.MyCMS.
+ Он будет доступен при перехвате ссылок, соответствующих шаблону /CMS,
+ т.е. http://yoursite.com/CMS.
+ -->
+<!--<servlet>-->
+<!--<servlet-name>MyCMS</servlet-name>-->
+<!--<servlet-class>com.examplecompany.MyCMS</servlet-class>-->
+<!--</servlet>-->
+<!--<servlet-mapping>-->
+<!--<servlet-name>MyCMS</servlet-name>-->
+<!--<url-pattern>/CMS</url-pattern>-->
+<!--</servlet-mapping>-->
+<!--Теперь определим <welcome-file-list> со списком страниц, которые должен перебрать
+сервер, прежде чем выдать ошибку путь не найден:-->
+<!---->
+        <!-- The main page for the site will be the MyCMS servlet (http://website/CMS) -->
+<!--<welcome-file-list>-->
+<!--<welcome-file>CMS</welcome-file>-->
+<!--<welcome-file>index.html</welcome-file>-->
+<!--<welcome-file>index.htm</welcome-file>-->
+<!--<welcome-file>index.jsp</welcome-file>-->
+<!--</welcome-file-list>-->
+<!--Как это будет работать?
+
+Когда кто-либо переходит на сайт, то происходит следующее
+
+http://yoursite.com превращается в http://yoursite.com/
+Сервер не находит ничего полезного для отображения и должен вывести ошибку,
+но у нас настроен welcome-file-list, значит, как описано выше сначала должен
+быть обработан этот атрибут.
+http://yoursite.com/ — это уже директория и начинается сканирование по
+welcome-file-list
+http://yoursite.com/CMS — первая в списке сканирования и это соответствует
+URL /CMS сервлета MyCMS, а значит он вступает в работу.
+Отмечу что
+http://yoursite.com/CMS - будет работать
+http://yoursite.com/someFolder/CMS - так не будет работать!
+Важное замечание — в атрибуте <welcome-file> слеш вначале ставить не нужно,
+т.е. если <url-pattern> /servlet/MyServlet, то нужно писать вот так
+<welcome-file>servlet/MyServlet</welcome-file>-->
+
+
+
+<!--Элемент <context-param> в файле web.xml задает параметр, которым
+инициализируются сервлеты. Внутри этого элемента с помощью элемента
+<param-name> задается имя параметра, а с помощью элемента <param-value> -
+значение параметра.
+
+Например, определим следующий файл web.xml:-->
+<!--<context-param>
+    <param-name>message</param-name>
+    <param-value>Hello Servlets</param-value>
+  </context-param>-->
+<!--В данном случае параметр называется "message" и имеет значение "Hello Servlets".
+Этот параметр доступен всем сервлетам в приложении.
+
+Для получения параметра внутри сервлета необходимо обратиться к контексту сервлета.
+Для его получения внутри класса сервлета определен метод getServletContext().
+Он возвращает объект ServletContext. Затем у этого объекта вызывается метод
+getInitParameter(), в который передается название параметра инициализации.
+
+Например, получим выше определенный параметр в сервлете:-->
+<!--@WebServlet("/hello")
+public class HelloServlet extends HttpServlet {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String message = getServletContext().getInitParameter("message");
+        response.setContentType("text/html");
+        PrintWriter writer = response.getWriter();
+        try {
+            writer.println("<h2>" + message + "</h2>");
+        } finally {
+            writer.close();
+        }
+    }
+}-->
+
+
+
+
+
+<!--<listener>-->
+<!---->
+<!--И лисенер, и диспетчер поднимают ApplicationContext. Сначала поднимает лисенер,
+далее диспатчер поднимает дочерний контекст. Таким образом в бинах, подгружаемых
+диспатчером, можно делать референсы на бины, загружаемые лисенером.
+Главный вопрос - зачем?
+Для секьюрити. В лисенере прописывается спринг секьюрити конфигурация, а в
+диспатчере бины из spring mvc. Т.о. бины из приложения могут использовать бины
+для секьюрити, но не наоборот.
+Подробнее можно почитать в какой-нибудь книге по спринг секьюрити, например Spring
+Security 3.1.
+
+Само название listener, как бы намекает, что это некий слушатель.
+Т.е. он предназначен, чтобы слушать некие события. У Spring есть своя
+реализация событийной модели, на сколько я помню. По поводу конфига,
+да Вы можете его не указывать, но чтоб не насиловать classpath при старте
+приложения можно напрямую указать файл конфигурации. Т.е. это просто набор
+таких правил, при следовании которым, Вам гарантируется корректный старт и
+работа приложения.-->
