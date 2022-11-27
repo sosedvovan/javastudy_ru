@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+	   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/jdbc
+       http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task.xsd">
+
+<!--    папку config для этих 2-х файлов создаем след образом:
+пкм по WEB_INF -> new -> XML Config... file ->
+ -> Spring Config -> введем название папки config
+ далее указать в Project Structure эти два файла:
+               + Spring + ...-->
+
+
+<!--    Здесь только указан путь к статическим ресурсам(бутстрапу, js, fonts...).
+В комментарии показано как можно подключать
+другие ресурсы, например темы.-->
+    <!-- Static Resources Configuration (get access to static sources such as CSS and JavaScript files)
+    те ресурсы ищем от рута(webapp) в папке "/resources/"-->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <!-- themes can be put in different folder such as
+        <mvc:resources mapping="/resources/**" location="/resources/themeBlue" />
+        <mvc:resources mapping="/resources/**" location="/resources/themeGreen" />
+     -->
+
+<!--    Для начала работы с JDBC нам необходимо прописать в этом конфигурационном файле Spring бин для
+        работы с базой данных и источник этих данных.
+        property-placeholder указывает где нужно искать файл со свойствами (будет приведен чуть ниже).
+        Эти свойства используются в описании бина id=dataSource.
+         В свойствах указываются стандартные настройки вроде логина, драйвера для работы с БД
+         и путь к ней. Ниже прописан путь к самим данным
+         (dbschema.sql — скрипты создания БД, test-data.sql — сами данные)-->
+<!--    для хибернета(та же база что и для JDBC): Вначале задается источник
+       данных (dataSource), который в нашем случае является in-memory базой
+       данных H2. Настройки для url, username берутся из файла util.properties
+       (задается строчкой выше <context:property-placeholder location=»classpath:util.properties» />)-->
+    <!--find property file. See bean id='dataSource' for example ${jdbc.hsqldb.driverClass}-->
+    <context:property-placeholder location="classpath:util.properties" />
+    <!-- XML Bean Definitions -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.hsqldb.driverClass}" />
+        <property name="url" value="${jdbc.hsqldb.url}" />
+        <property name="username" value="${jdbc.hsqldb.username}" />
+        <property name="password" value="${jdbc.hsqldb.password}" />
+    </bean>
+    <!-- initialize Embedded DataSource. Встроенная база данных-->
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:dbschema.sql"/>
+        <jdbc:script location="classpath:test-data.sql"/>
+    </jdbc:initialize-database>
+
+
+<!--    добавлены бины ‘mailSender‘ и ‘velocityEngine‘. В первом мы
+задаем имя и пароль от вашего почтового сервера (в моем случае это
+логин-пароль от моей почты на Gmail), затем указываются свойства
+smtp сервера. В скобочках с значком доллара используются значения
+из utils.properties (описаны в статье spring mvc и jdbc).-->
+    <!-- Java Mail Configuration -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="username" value="${java.mail.username}"/>
+        <property name="password" value="${java.mail.password}"/>
+        <property name="port" value="465"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.starttls.required">true</prop>
+                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+                <prop key="mail.smtp.host">${java.mail.host}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Velocity Email Template Config Bean подключили форму для ввода самого письма-->
+    <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <property name="resourceLoaderPath" value="/WEB-INF/email-templates/"/>
+    </bean>
+
+
+
+    <!-- REST template configuration -->
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+
+<!--    для хибернета: Главной частью этой статьи является описание бина entityManagerFactory.
+В свойствах (property) указываются:
+пакеты для сканирования\поиска сущностей (маппят классы на таблицы);
+источник данных — dataSource; JPA адаптер — HibernateJpaVendorAdapter и два
+необязательных свойства (generateDdl и showSql); далее свойства подключения
+jpa к базе данных (аналогично как это было для ранее рассмотренного случая
+работы с JDBC). В конце был подключен менеджер транзакций.-->
+    <!--Do not forget activate @Transactional JPA annotation with
+    <annotation-driven/>-->
+    <!-- JPA Persistence Context and EntityManager configuration -->
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+        <!--packagesToScan - search Entity and mapping them -->
+        <property name="packagesToScan" value="ru.javastudy.mvcHtml5Angular.mvc.bean" />
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" >
+                <property name="generateDdl" value="true" />
+                <property name="showSql" value="true" />
+            </bean>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Automatic Transaction Participation-->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <!--not uses but could autowired in JDBCExample bean-->
+    <!--     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+          <property name="dataSource" ref="dataSource"></property>
+      </bean>
+       -->
+
+<!--    Конфигурация spring для работы аннотации @Scheduled(планировщик заданий Schedule)
+Для того, чтобы аннотация была замечена приложением и методы в классе были выполнены как задумано,
+необходимо в файле конфигурации spring записать следующие строчки:
+Определить в пространстве имен xmlns:task=»http://www.springframework.org/schema/task»
+и http://www.springframework.org/schema/task,
+http://www.springframework.org/schema/task/spring-task.xsd
+Подключить поиск аннотаций для планирования задач  <task:annotation-driven/>
+Задать бин или указать пакет поиска бинов с аннотациями спринг (@Component)-->
+    <!-- Quartz scheduling configuration -->
+    <task:annotation-driven/>
+    <!--ScheduleTask example. Use and @Component on ru.javastudy.mvcHtml5Angular.mvc.scheduling.ScheduleTask-->
+    <context:component-scan base-package="ru.javastudy.mvcHtml5Angular.mvc.scheduling"/>
+    <!--or
+   <bean id="scheduleTask" class="ru.javastudy.mvcHtml5Angular.mvc.scheduling.ScheduleTask"/>
+   -->
+    <!--End scheduling configuration -->
+
+
+
+<!--Конфигурация spring для работы планировщика Quartz:  (8-мь бинов)-->
+    <!-- Quartz scheduling configuration
+    закоментил тк уже сверху есть такая аннотация
+    (если 2-е одинаковые строчки в контексте- тогда проект не загружается)-->
+<!--    <task:annotation-driven/>-->
+
+    <!-- Quartz simple trigger -->
+    <bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="simpleQuartzJob" />
+        <property name="repeatInterval" value="3000" />
+        <property name="startDelay" value="1000" />
+    </bean>
+    <!-- Quartz cron trigger -->
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="quartzCronJob"/>
+        <property name="cronExpression" value="0/7 * * * * ?" />
+        <!-- every 30 seconds (seconds, minutes, hours, day of month, month, day of week, year(optional)) -->
+    </bean>
+
+    <!-- Quartz job -->
+    <bean id="simpleQuartzJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="simpleQuartzTask" />
+        <property name="targetMethod" value="simpleTaskMethod" />
+    </bean>
+    <!-- Quartz cron job -->
+    <bean id="quartzCronJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="cronQuartzTask" />
+        <property name="targetMethod" value="cronTaskMethod" />
+    </bean>
+
+    <!-- Quartz simple task -->
+    <bean id="simpleQuartzTask" class="ru.javastudy.mvcHtml5Angular.mvc.quarts.QuartzTask" />
+
+    <!-- Quartz cron task -->
+    <bean id="cronQuartzTask" class="ru.javastudy.mvcHtml5Angular.mvc.quarts.CronQuartzTask" />
+
+    <!-- Quartz Scheduler -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+                <ref bean="simpleQuartzJob" />
+                <ref bean="quartzCronJob" />
+            </list>
+        </property>
+        <property name="triggers">
+            <list>
+                <ref bean="simpleTrigger" />
+                <ref bean="cronTrigger" />
+            </list>
+        </property>
+    </bean>
+
+
+</beans>
+
+<!--3.5. Файл конфигурации Spring
+Небольшое отступление — обратите внимание, что в проекте
+пакет web был переименован в webapp (стандартная структура веб проекта).
+Это необходимо учесть в Project Structure (ctrl+alt+shift+s) и поменять путь к корню
+веб приложения. в фасетах в нижней текстареа-->
+<!--Теперь настроим Spring. Для этого в приложении используются два конфигурационных
+файла: application-context.xml и mvc-config.xml. В первом будут указывать
+настройки для всего приложения, во втором — только относящиеся к web-mvc.
+Назвать их можно как угодно, но рекомендую разделять их примерно таким образом
+(кстати это не обязательно и всё можно держать вообще в одном файле, но с
+ростом проекта могут возникнуть сложности поддержки).-->

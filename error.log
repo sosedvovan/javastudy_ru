@@ -7236,3 +7236,282 @@ INFO  QuartzTask - Test Simple Quartz Time: Sun Nov 27 17:36:01 MSK 2022
 INFO  QuartzTask - Test Simple Quartz Time: Sun Nov 27 17:36:04 MSK 2022
 INFO  XmlWebApplicationContext - Closing WebApplicationContext for namespace 'dispatcherServlet-servlet': startup date [Sun Nov 27 17:13:25 MSK 2022]; parent: Root WebApplicationContext
 INFO  GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@572dcd67: startup date [Sun Nov 27 17:13:27 MSK 2022]; parent: WebApplicationContext for namespace 'dispatcherServlet-servlet'
+INFO  DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+INFO  DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2fd66ad3, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5d11346a, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7a36aefa, org.springframework.test.context.support.DirtiesContextTestExecutionListener@17211155, org.springframework.test.context.transaction.TransactionalTestExecutionListener@b3d7190, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5fdba6f9]
+INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [mvc-config.xml]
+INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+INFO  GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@2bbaf4f0: startup date [Sun Nov 27 20:26:23 MSK 2022]; root of context hierarchy
+INFO  PropertySourcesPlaceholderConfigurer - Loading properties file from class path resource [util.properties]
+INFO  AsyncAnnotationBeanPostProcessor - No TaskExecutor bean found for async annotation processing.
+INFO  DriverManagerDataSource - Loaded JDBC driver: org.hsqldb.jdbcDriver
+INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  Version - HHH000412: Hibernate Core {5.0.1.Final}
+INFO  Environment - HHH000206: hibernate.properties not found
+INFO  Environment - HHH000021: Bytecode provider name : javassist
+INFO  Version - HCANN000001: Hibernate Commons Annotations {5.0.0.Final}
+INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.HSQLDialect
+INFO  Version - HV000001: Hibernate Validator 5.1.0.Final
+INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+INFO  InformationExtractorJdbcDatabaseMetaDataImpl - HHH000262: Table not found: USER
+INFO  InformationExtractorJdbcDatabaseMetaDataImpl - HHH000262: Table not found: USER
+INFO  SpringResourceLoader - SpringResourceLoader for Velocity: using resource loader [org.springframework.context.support.GenericApplicationContext@2bbaf4f0: startup date [Sun Nov 27 20:26:23 MSK 2022]; root of context hierarchy] and resource loader paths [/WEB-INF/email-templates/]
+INFO  RequestMappingHandlerMapping - Mapped "{[/writeCookie],methods=[GET]}" onto public java.lang.String ru.javastudy.mvcHtml5Angular.mvc.cookie.CookieController.writeCookieExample(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+INFO  RequestMappingHandlerMapping - Mapped "{[/readAllCookies],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.cookie.CookieController.readAllCookiesExample(javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/readCookie],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.cookie.CookieController.readCookieExample(javax.servlet.http.Cookie,javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/email/send],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.email.EmailController.email(ru.javastudy.mvcHtml5Angular.mvc.email.EmailModel)
+INFO  RequestMappingHandlerMapping - Mapped "{[/excel],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.excelpdf.ExcelPDFController.excel()
+INFO  RequestMappingHandlerMapping - Mapped "{[/pdf],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.excelpdf.ExcelPDFController.pdf()
+INFO  RequestMappingHandlerMapping - Mapped "{[/runtimeException],methods=[GET]}" onto public void ru.javastudy.mvcHtml5Angular.mvc.exception.ExceptionController.throwException()
+INFO  RequestMappingHandlerMapping - Mapped "{[/uploadFile],methods=[POST]}" onto public java.lang.String ru.javastudy.mvcHtml5Angular.mvc.file.FileUploadController.handleFileUpload(org.springframework.web.multipart.MultipartFile)
+INFO  RequestMappingHandlerMapping - Mapped "{[/interceptorCall/subLevel],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.interceptors.InterceptorController.interceptorCall()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcQueryAllUsers],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcSelectAllUsers()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcDelete/user/{iduser}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcDelete(int)
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcInsert/logstring/{logstring}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcInsert(java.lang.String)
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcUpdate/user/username/{username}/enabled/{enabled}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcUpdate(java.lang.String,boolean)
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcSelectLogs],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcSelect()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jstlReturnUsers],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jstl.JSTLController.listUsers()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jstlHTML],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jstl.JSTLController.returnHTML()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jstlUser],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jstl.JSTLController.getUser()
+INFO  RequestMappingHandlerMapping - Mapped "{[/queryFindByIdUser/{userid}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.queryFindByIdUser(int)
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormInsertUser/username/{username}/password/{password}/enabled/{enabled}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormInsertUser(java.lang.String,java.lang.String,boolean)
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormUpdateUser/iduser/{iduser}/enabled/{enabled}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormUpdateUser(int,boolean)
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormDeleteUser/iduser/{iduser}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormDeleteUser(int)
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormFindAllUsers],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormFindAllUsers()
+INFO  RequestMappingHandlerMapping - Mapped "{[/redirectExample],methods=[GET]}" onto public java.lang.String ru.javastudy.mvcHtml5Angular.mvc.redirect.RedirectController.redirectExample(javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/invalidateSession],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.scope.ScopeController.invalidateSession(javax.servlet.http.HttpSession)
+INFO  RequestMappingHandlerMapping - Mapped "{[/scopeRequest],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.scope.ScopeController.requestScopeExample(javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/scopeSession],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.scope.ScopeController.scopeExample(javax.servlet.http.HttpSession)
+INFO  RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.context.support.GenericApplicationContext@2bbaf4f0: startup date [Sun Nov 27 20:26:23 MSK 2022]; root of context hierarchy
+INFO  RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.context.support.GenericApplicationContext@2bbaf4f0: startup date [Sun Nov 27 20:26:23 MSK 2022]; root of context hierarchy
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/about.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/index.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/file.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/jdbc.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/email.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/rest.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/orm.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/exception.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/jstl.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/scope.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/cookieView.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1'
+INFO  ScriptUtils - Executing SQL script from class path resource [dbschema.sql]
+INFO  ScriptUtils - Executed SQL script from class path resource [dbschema.sql] in 8 ms.
+INFO  ScriptUtils - Executing SQL script from class path resource [test-data.sql]
+INFO  ScriptUtils - Executed SQL script from class path resource [test-data.sql] in 10 ms.
+INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+INFO  QuartzScheduler - Quartz Scheduler v.2.2.1 created.
+INFO  RAMJobStore - RAMJobStore initialized.
+INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'org.springframework.scheduling.quartz.SchedulerFactoryBean#0' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+INFO  StdSchedulerFactory - Quartz scheduler 'org.springframework.scheduling.quartz.SchedulerFactoryBean#0' initialized from an externally provided properties instance.
+INFO  StdSchedulerFactory - Quartz scheduler version: 2.2.1
+INFO  QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@7a729f84
+INFO  DefaultLifecycleProcessor - Starting beans in phase 2147483647
+INFO  SchedulerFactoryBean - Starting Quartz Scheduler now
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED started.
+INFO  GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@2bbaf4f0: startup date [Sun Nov 27 20:26:23 MSK 2022]; root of context hierarchy
+INFO  DefaultLifecycleProcessor - Stopping beans in phase 2147483647
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED paused.
+INFO  SchedulerFactoryBean - Shutting down Quartz Scheduler
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED shutting down.
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED paused.
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED shutdown complete.
+INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+INFO  DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@16f7c8c1, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2f0a87b3, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@319b92f3, org.springframework.test.context.support.DirtiesContextTestExecutionListener@fcd6521, org.springframework.test.context.transaction.TransactionalTestExecutionListener@27d415d9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5c18298f]
+INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [mvc-config.xml]
+INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+INFO  GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@d6da883: startup date [Sun Nov 27 20:30:19 MSK 2022]; root of context hierarchy
+INFO  PropertySourcesPlaceholderConfigurer - Loading properties file from class path resource [util.properties]
+INFO  AsyncAnnotationBeanPostProcessor - No TaskExecutor bean found for async annotation processing.
+INFO  DriverManagerDataSource - Loaded JDBC driver: org.hsqldb.jdbcDriver
+INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  Version - HHH000412: Hibernate Core {5.0.1.Final}
+INFO  Environment - HHH000206: hibernate.properties not found
+INFO  Environment - HHH000021: Bytecode provider name : javassist
+INFO  Version - HCANN000001: Hibernate Commons Annotations {5.0.0.Final}
+INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.HSQLDialect
+INFO  Version - HV000001: Hibernate Validator 5.1.0.Final
+INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+INFO  InformationExtractorJdbcDatabaseMetaDataImpl - HHH000262: Table not found: USER
+INFO  InformationExtractorJdbcDatabaseMetaDataImpl - HHH000262: Table not found: USER
+INFO  SpringResourceLoader - SpringResourceLoader for Velocity: using resource loader [org.springframework.context.support.GenericApplicationContext@d6da883: startup date [Sun Nov 27 20:30:19 MSK 2022]; root of context hierarchy] and resource loader paths [/WEB-INF/email-templates/]
+INFO  RequestMappingHandlerMapping - Mapped "{[/readAllCookies],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.cookie.CookieController.readAllCookiesExample(javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/readCookie],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.cookie.CookieController.readCookieExample(javax.servlet.http.Cookie,javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/writeCookie],methods=[GET]}" onto public java.lang.String ru.javastudy.mvcHtml5Angular.mvc.cookie.CookieController.writeCookieExample(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+INFO  RequestMappingHandlerMapping - Mapped "{[/email/send],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.email.EmailController.email(ru.javastudy.mvcHtml5Angular.mvc.email.EmailModel)
+INFO  RequestMappingHandlerMapping - Mapped "{[/pdf],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.excelpdf.ExcelPDFController.pdf()
+INFO  RequestMappingHandlerMapping - Mapped "{[/excel],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.excelpdf.ExcelPDFController.excel()
+INFO  RequestMappingHandlerMapping - Mapped "{[/runtimeException],methods=[GET]}" onto public void ru.javastudy.mvcHtml5Angular.mvc.exception.ExceptionController.throwException()
+INFO  RequestMappingHandlerMapping - Mapped "{[/uploadFile],methods=[POST]}" onto public java.lang.String ru.javastudy.mvcHtml5Angular.mvc.file.FileUploadController.handleFileUpload(org.springframework.web.multipart.MultipartFile)
+INFO  RequestMappingHandlerMapping - Mapped "{[/interceptorCall/subLevel],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.interceptors.InterceptorController.interceptorCall()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcQueryAllUsers],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcSelectAllUsers()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcSelectLogs],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcSelect()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcDelete/user/{iduser}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcDelete(int)
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcInsert/logstring/{logstring}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcInsert(java.lang.String)
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcUpdate/user/username/{username}/enabled/{enabled}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcUpdate(java.lang.String,boolean)
+INFO  RequestMappingHandlerMapping - Mapped "{[/jstlReturnUsers],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jstl.JSTLController.listUsers()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jstlUser],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jstl.JSTLController.getUser()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jstlHTML],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jstl.JSTLController.returnHTML()
+INFO  RequestMappingHandlerMapping - Mapped "{[/queryFindByIdUser/{userid}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.queryFindByIdUser(int)
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormFindAllUsers],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormFindAllUsers()
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormInsertUser/username/{username}/password/{password}/enabled/{enabled}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormInsertUser(java.lang.String,java.lang.String,boolean)
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormUpdateUser/iduser/{iduser}/enabled/{enabled}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormUpdateUser(int,boolean)
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormDeleteUser/iduser/{iduser}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormDeleteUser(int)
+INFO  RequestMappingHandlerMapping - Mapped "{[/redirectExample],methods=[GET]}" onto public java.lang.String ru.javastudy.mvcHtml5Angular.mvc.redirect.RedirectController.redirectExample(javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/invalidateSession],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.scope.ScopeController.invalidateSession(javax.servlet.http.HttpSession)
+INFO  RequestMappingHandlerMapping - Mapped "{[/scopeRequest],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.scope.ScopeController.requestScopeExample(javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/scopeSession],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.scope.ScopeController.scopeExample(javax.servlet.http.HttpSession)
+INFO  RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.context.support.GenericApplicationContext@d6da883: startup date [Sun Nov 27 20:30:19 MSK 2022]; root of context hierarchy
+INFO  RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.context.support.GenericApplicationContext@d6da883: startup date [Sun Nov 27 20:30:19 MSK 2022]; root of context hierarchy
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/about.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/index.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/file.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/jdbc.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/email.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/rest.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/orm.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/exception.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/jstl.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/scope.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/cookieView.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1'
+INFO  ScriptUtils - Executing SQL script from class path resource [dbschema.sql]
+INFO  ScriptUtils - Executed SQL script from class path resource [dbschema.sql] in 0 ms.
+INFO  ScriptUtils - Executing SQL script from class path resource [test-data.sql]
+INFO  ScriptUtils - Executed SQL script from class path resource [test-data.sql] in 10 ms.
+INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+INFO  QuartzScheduler - Quartz Scheduler v.2.2.1 created.
+INFO  RAMJobStore - RAMJobStore initialized.
+INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'org.springframework.scheduling.quartz.SchedulerFactoryBean#0' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+INFO  StdSchedulerFactory - Quartz scheduler 'org.springframework.scheduling.quartz.SchedulerFactoryBean#0' initialized from an externally provided properties instance.
+INFO  StdSchedulerFactory - Quartz scheduler version: 2.2.1
+INFO  QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@582a764a
+INFO  DefaultLifecycleProcessor - Starting beans in phase 2147483647
+INFO  SchedulerFactoryBean - Starting Quartz Scheduler now
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED started.
+INFO  GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@d6da883: startup date [Sun Nov 27 20:30:19 MSK 2022]; root of context hierarchy
+INFO  DefaultLifecycleProcessor - Stopping beans in phase 2147483647
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED paused.
+INFO  SchedulerFactoryBean - Shutting down Quartz Scheduler
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED shutting down.
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED paused.
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED shutdown complete.
+INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+INFO  DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5d11346a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@7a36aefa, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@17211155, org.springframework.test.context.support.DirtiesContextTestExecutionListener@b3d7190, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5fdba6f9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@10d59286]
+INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [mvc-config.xml]
+INFO  XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+INFO  GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@11c20519: startup date [Sun Nov 27 20:42:38 MSK 2022]; root of context hierarchy
+INFO  PropertySourcesPlaceholderConfigurer - Loading properties file from class path resource [util.properties]
+INFO  AsyncAnnotationBeanPostProcessor - No TaskExecutor bean found for async annotation processing.
+INFO  DriverManagerDataSource - Loaded JDBC driver: org.hsqldb.jdbcDriver
+INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  Version - HHH000412: Hibernate Core {5.0.1.Final}
+INFO  Environment - HHH000206: hibernate.properties not found
+INFO  Environment - HHH000021: Bytecode provider name : javassist
+INFO  Version - HCANN000001: Hibernate Commons Annotations {5.0.0.Final}
+INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.HSQLDialect
+INFO  Version - HV000001: Hibernate Validator 5.1.0.Final
+INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+INFO  InformationExtractorJdbcDatabaseMetaDataImpl - HHH000262: Table not found: USER
+INFO  InformationExtractorJdbcDatabaseMetaDataImpl - HHH000262: Table not found: USER
+INFO  SpringResourceLoader - SpringResourceLoader for Velocity: using resource loader [org.springframework.context.support.GenericApplicationContext@11c20519: startup date [Sun Nov 27 20:42:38 MSK 2022]; root of context hierarchy] and resource loader paths [/WEB-INF/email-templates/]
+INFO  RequestMappingHandlerMapping - Mapped "{[/readCookie],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.cookie.CookieController.readCookieExample(javax.servlet.http.Cookie,javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/writeCookie],methods=[GET]}" onto public java.lang.String ru.javastudy.mvcHtml5Angular.mvc.cookie.CookieController.writeCookieExample(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+INFO  RequestMappingHandlerMapping - Mapped "{[/readAllCookies],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.cookie.CookieController.readAllCookiesExample(javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/email/send],methods=[POST]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.email.EmailController.email(ru.javastudy.mvcHtml5Angular.mvc.email.EmailModel)
+INFO  RequestMappingHandlerMapping - Mapped "{[/pdf],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.excelpdf.ExcelPDFController.pdf()
+INFO  RequestMappingHandlerMapping - Mapped "{[/excel],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.excelpdf.ExcelPDFController.excel()
+INFO  RequestMappingHandlerMapping - Mapped "{[/runtimeException],methods=[GET]}" onto public void ru.javastudy.mvcHtml5Angular.mvc.exception.ExceptionController.throwException()
+INFO  RequestMappingHandlerMapping - Mapped "{[/uploadFile],methods=[POST]}" onto public java.lang.String ru.javastudy.mvcHtml5Angular.mvc.file.FileUploadController.handleFileUpload(org.springframework.web.multipart.MultipartFile)
+INFO  RequestMappingHandlerMapping - Mapped "{[/interceptorCall/subLevel],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.interceptors.InterceptorController.interceptorCall()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcInsert/logstring/{logstring}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcInsert(java.lang.String)
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcDelete/user/{iduser}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcDelete(int)
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcUpdate/user/username/{username}/enabled/{enabled}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcUpdate(java.lang.String,boolean)
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcSelectLogs],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcSelect()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jdbcQueryAllUsers],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jdbc.JDBCController.jdbcSelectAllUsers()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jstlUser],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jstl.JSTLController.getUser()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jstlHTML],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jstl.JSTLController.returnHTML()
+INFO  RequestMappingHandlerMapping - Mapped "{[/jstlReturnUsers],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.jstl.JSTLController.listUsers()
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormUpdateUser/iduser/{iduser}/enabled/{enabled}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormUpdateUser(int,boolean)
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormFindAllUsers],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormFindAllUsers()
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormDeleteUser/iduser/{iduser}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormDeleteUser(int)
+INFO  RequestMappingHandlerMapping - Mapped "{[/ormInsertUser/username/{username}/password/{password}/enabled/{enabled}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.ormInsertUser(java.lang.String,java.lang.String,boolean)
+INFO  RequestMappingHandlerMapping - Mapped "{[/queryFindByIdUser/{userid}],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.orm.ORMController.queryFindByIdUser(int)
+INFO  RequestMappingHandlerMapping - Mapped "{[/redirectExample],methods=[GET]}" onto public java.lang.String ru.javastudy.mvcHtml5Angular.mvc.redirect.RedirectController.redirectExample(javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/scopeSession],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.scope.ScopeController.scopeExample(javax.servlet.http.HttpSession)
+INFO  RequestMappingHandlerMapping - Mapped "{[/scopeRequest],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.scope.ScopeController.requestScopeExample(javax.servlet.http.HttpServletRequest)
+INFO  RequestMappingHandlerMapping - Mapped "{[/invalidateSession],methods=[GET]}" onto public org.springframework.web.servlet.ModelAndView ru.javastudy.mvcHtml5Angular.mvc.scope.ScopeController.invalidateSession(javax.servlet.http.HttpSession)
+INFO  RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.context.support.GenericApplicationContext@11c20519: startup date [Sun Nov 27 20:42:38 MSK 2022]; root of context hierarchy
+INFO  RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.context.support.GenericApplicationContext@11c20519: startup date [Sun Nov 27 20:42:38 MSK 2022]; root of context hierarchy
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/about.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/index.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/file.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/jdbc.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/email.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/rest.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/orm.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/exception.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/jstl.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/scope.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/cookieView.html] onto handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+INFO  SimpleUrlHandlerMapping - Mapped URL path [/resources/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#1'
+INFO  ScriptUtils - Executing SQL script from class path resource [dbschema.sql]
+INFO  ScriptUtils - Executed SQL script from class path resource [dbschema.sql] in 10 ms.
+INFO  ScriptUtils - Executing SQL script from class path resource [test-data.sql]
+INFO  ScriptUtils - Executed SQL script from class path resource [test-data.sql] in 10 ms.
+INFO  StdSchedulerFactory - Using default implementation for ThreadExecutor
+INFO  SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+INFO  QuartzScheduler - Quartz Scheduler v.2.2.1 created.
+INFO  RAMJobStore - RAMJobStore initialized.
+INFO  QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.2.1) 'org.springframework.scheduling.quartz.SchedulerFactoryBean#0' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+INFO  StdSchedulerFactory - Quartz scheduler 'org.springframework.scheduling.quartz.SchedulerFactoryBean#0' initialized from an externally provided properties instance.
+INFO  StdSchedulerFactory - Quartz scheduler version: 2.2.1
+INFO  QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@7a729f84
+INFO  DefaultLifecycleProcessor - Starting beans in phase 2147483647
+INFO  SchedulerFactoryBean - Starting Quartz Scheduler now
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED started.
+INFO  GenericApplicationContext - Closing org.springframework.context.support.GenericApplicationContext@11c20519: startup date [Sun Nov 27 20:42:38 MSK 2022]; root of context hierarchy
+INFO  DefaultLifecycleProcessor - Stopping beans in phase 2147483647
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED paused.
+INFO  SchedulerFactoryBean - Shutting down Quartz Scheduler
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED shutting down.
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED paused.
+INFO  QuartzScheduler - Scheduler org.springframework.scheduling.quartz.SchedulerFactoryBean#0_$_NON_CLUSTERED shutdown complete.
+INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'

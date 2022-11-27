@@ -1,0 +1,17 @@
+JUnit в Spring MVC. Подключение и настройка JUnit в Spring MVC
+Тестирование с помощью JUnit в Spring MVC. Подключение и настройка JUnit.
+Внедрение ресурсов и зависимостей в тестирующий класс
+
+Обзор приложения Spring MVC + AngularJS + Bootstrap + HTML5
+Используемые технологии и библиотеки
+Spring MVC 4.2.4.Release
+JUnit 4.12
+Maven 3.2.5
+IntelliJ IDEA 15.0.2
+1. Описание задачи
+Рассмотреть использование фреймворка JUnit в приложении Spring MVC.
+Создать тестовый класс с применением тестовых аннотаций. Произвести
+настройки в файле конфигурации Spring MVC.
+
+Для тестирования используются классы JDBCExampleTest и SampleTestBean.
+В них будут использованы классы из проекта: DBLog, SampleBean, User, JDBCExample.
