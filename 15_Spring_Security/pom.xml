@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.javastudy</groupId>
+    <artifactId>mvc_html5_angular</artifactId>
+    <version>1.0</version>
+
+    <properties>
+
+        <!-- Generic properties -->
+        <java.version>1.8</java.version>
+        <!-- Web -->
+        <jsp.version>2.2</jsp.version>
+        <jstl.version>1.2</jstl.version>
+        <servlet.version>3.1.0</servlet.version>
+
+        <!-- Spring -->
+        <spring-framework.version>4.2.4.RELEASE</spring-framework.version>
+
+        <!-- JUnit test -->
+        <junit.version>4.12</junit.version>
+
+        <!-- Hibernate / JPA -->
+        <hibernate.version>5.0.1.Final</hibernate.version>
+
+        <!-- Spring Data -->
+        <spring-framework.data.version>1.9.1.RELEASE</spring-framework.data.version>
+
+        <!-- Logging -->
+        <!--logback - improved version of log4j-->
+        <logback.version>1.2.3</logback.version>
+        <slf4j.version>1.7.28</slf4j.version>
+
+        <!-- Quartz scheduling framework -->
+        <quartz.scheduling.version>2.2.1</quartz.scheduling.version>
+
+        <!-- Spring Security -->
+        <spring-security.version>4.0.4.RELEASE</spring-security.version>
+
+
+    </properties>
+
+<!--    такая запись позволяет подключать необходимый модуль без указании в нем версии
+(это помогает избегать коллизий косяков совместимости последних версий-->
+    <dependencyManagement>
+        <!--all spring dependencies -->
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring-framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--bootstrap webjars.org-->
+
+    <dependencies>
+
+        <!-- Spring MVC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+<!-- вообще exclusion  в  spring-context в др проекте вставляли а не в spring-webmvc         -->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>commons-logging</groupId>-->
+<!--                    <artifactId>commons-logging</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+        </dependency>
+
+        <!-- Other Servlet Web dependencies -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${jsp.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Apache Commons File Upload -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+
+        <!-- Excel view -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.12</version>
+        </dependency>
+
+        <!-- PDF view -->
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>2.1.5</version>
+        </dependency>
+
+        <!-- HSQLDB embedded database. Встроенная база данных-->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+
+        <!-- Spring JDBC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+
+<!--        Зависимость для JUnit позволяет использовать возможности этого
+фреймворка. Так же следует обратить внимание на подключенный модуль
+тестирования Spring. В рамках этой статьи рассказать об особенностях
+и возможностях этого модуля рассказать не получится
+(в документации на это выделено несколько глав).
+Модуль предоставляет широкий набор аннотаций (например здесь мы будем
+использовать @ContextConfiguration), возможности для тестирования
+ORM функционала (JDBCExampleTest в нашем приложении) и многое другое.-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Test Artifacts with Spring-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Logging with SLF4J & LogBack -->
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-api</artifactId>-->
+<!--            <version>${slf4j.version}</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+
+        <!--Contains org.springframework.mail.javamail-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
+        <!-- Spring MVC Mail Related Dependency -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
+        </dependency>
+
+        <!--Hibernate ORM
+        Непосредственно библиотека Hibernate, вспомогательные классы (например для использования
+        аннотации @NotEmpty), а так же зависимости spring-data.-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <!--Hibernate validator (contains @NotEmpty)-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.1.0.Final</version>
+        </dependency>
+
+        <!--Spring Data-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-framework.data.version}</version>
+        </dependency>
+
+<!--        Для перехвата и обработки исключений никаких дополнительных зависимостей
+относительно предыдущего раздела подключать не нужно. Всё уже находится в подключенных
+зависимостях Spring MVC-->
+
+<!--        Для логирования будет использована современная библиотека Logback.-->
+        <!-- Logging with SLF4J & LogBack -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Quartz scheduling framework
+        планировщик заданий по простому триггеру и с помощью выражения cron-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.scheduling.version}</version>
+        </dependency>
+
+
+        <!--Spring Security
+        Первые три зависимости относятся напрямую к модулю Spring Security.
+        С помощью подключения этих зависимостей вы получаете возможность
+        использования проверки безопасности в веб проекте, использовать
+        пространство имен spring security и jsp тэгов прямо внутри страницы
+        представления. Так же в проект была добавлена зависимость спецификации
+        jsr-250. Она была добавлена для использования в контроллере аннотации
+        @RolesAllowed и сравнении с аннотациями из Spring.-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <!--To start using the security namespace in your application context-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <!--Provides Spring Security’s JSP tag implementations.-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring-security.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <!--Common Java Annotations.
+        For this app it includes security annotation: @RolesAllowed; @DenyAll, @RunAs, @PermitAll
+         -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+    </dependencies>
+    <!--http://startbootstrap.com/template-overviews/modern-business/  this is theme-->
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <!--need to find configs in tests in package web-inf like
+       @ContextConfiguration(locations = {"classpath:/config/application-context.xml"
+       -->
+        <testResources>
+            <testResource>
+                <directory>src/main/webapp/WEB-INF/config</directory>
+            </testResource>
+        </testResources>
+    </build>
+
+</project>
+<!--Итак в начале идет описание проекта (группа, id артефакта и версия).
+Далее в теге properties указываются версии для различных библиотек.
+Такой подход позволяет легко обновлять версии в дальнейшем и не лазить
+по длинному pom.xml файлу в поисках тега <version> нужной библиотеки.
+Здесь указаны версии: Java, JSP, JSTL и Servlet — они необходимы для базового
+веб приложения на основе jsp представлений. Далее идет версия самого фреймворка
+Spring.-->

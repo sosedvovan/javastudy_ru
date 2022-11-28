@@ -1,0 +1,99 @@
+<?xml version= "1.0" encoding= "UTF-8"?>
+<beans:beans xmlns:beans= "http://www.springframework.org/schema/beans"
+             xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+             xmlns= "http://www.springframework.org/schema/security"
+             xsi:schemaLocation= "http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+<!--    После определения пространства имен в тэге <http> </http> указываются
+атрибуты auto-config и use-expressions. Первый позволяет создать форму авторизации
+по умолчанию, второй атрибут позволяет использовать выражения
+(например hasRole(‘ADMIN’)).-->
+    <!-- auto-config= "true" > Automatically registers a login form, BASIC authentication,
+    logout services. use-expressions Enables EL-expressions in the access attribute -->
+    <http auto-config= "true" use-expressions= "true"  >
+
+
+<!--        <intercept-url> задает паттерн по которому будет проверяться уровень
+доступа клиента. Например <intercept-url pattern= «/user/**» access= «hasRole(‘USER’)»/>
+будет показывать страницу по адресу URL, содержащему /user/**, только пользователям
+с ролью USER.
+Пример: если попытаться войти без логина на страницу http://localhost:8080/user/,
+то клиент будет переброшен на страницу, указанную в form-login
+login-page=’pageName.html’.-->
+        <!--used to define the set of URL patterns that the application is interested in
+        and to configure how they should be handled. It is used to construct the
+        FilterInvocationSecurityMetadataSource used by the FilterSecurityInterceptor-->
+        <intercept-url pattern= "/security/**" access= "hasRole('ADMIN')"/>
+        <!--Если попытаться войти без логина на страницу в этом маппинге (например http://localhost:8080/user/),
+        то будет переброшено на страницу, указанную в form-login login-page='pageName.html' -->
+        <intercept-url pattern= "/user/**" access= "hasRole('USER')"/>
+
+
+
+<!--        <form-login> задает различные настройки страницы авторизации (формы).
+login-page — адрес страницы ввода логина и пароля. Если здесь ничего не указать,
+то Spring Security сгенерирует эту страницу самостоятельно.
+username-parameter и password-parameter — параметры, которые используются для
+связывания с именем пользователя и паролем, которые были введены пользователем
+в форму. На странице login.jsp это выглядит так:
+<label for= "inputEmail" class= "sr-only"><spring:message code= "email" text= "Email"/></label>
+<input id= "inputEmail" class= "form-control" name= "j_username" value= "admin@gmail.com" required autofocus/>
+<label for= "inputPassword" class= "sr-only"><spring:message code= "pass" text= "Password"/></label>
+<input type= "password" id= "inputPassword" class= "form-control" name= "j_password" value= "12345" required/>-->
+        <form-login login-page= "/login.html"
+                    username-parameter= "j_username"
+                    password-parameter= "j_password"
+                    login-processing-url= "/j_spring_security_check"
+                    authentication-failure-url= "/login.html?error=true" />
+<!--login-processing-url — задает значение action у form при котором Spring
+Security понимает, что нужно проверять пользователя согласно настройкам.
+authentication-failure-url — URL, который будет сгенерирован в случае ошибки.
+Заметьте, что здесь мы передаем в качестве параметра с именем error значение true.
+Этот параметр проверяется на странице login.jsp.
+<c:if test= "${not empty param.error}">
+  <font size= "2" color= "red"><b>Неправильный логин или пароль</b></font>
+</c:if>-->
+
+
+<!--<logout logout-url= ..> — параметр для выхода. Значение в этом атрибуте далее
+используется на странице представления (на кнопке выход).
+Например на странице admin.jsp:
+<p>Ссылка logout имеет атрибут  <span style= "color: #0080c0;">/j_spring_security_logout</span>,
+который прописан в security-config.xml
+</p>
+<span style= "color: #568C00;"><security:authentication property= "principal.username"/></span>
+<a style= "color: red;" href= "<c:url value= "/j_spring_security_logout"/>">Logout</a>-->
+        <logout logout-url= "/j_spring_security_logout" logout-success-url= "/"/>
+
+<!--        remember-me — создает чекбокс «запомни меня». Далее указано время жизни.
+Запоминание происходит путем использования cookie с именем, указанным в key
+(у нас — myKey).-->
+        <!--Save logged user in cookie with name key='name' -->
+        <remember-me key= "myKey" token-validity-seconds= "300"/>
+
+<!--        csrf — защита от этого типа атак. Подробнее в интернете.-->
+        <csrf disabled= "true"/>
+
+    </http>
+
+<!--    Далее идет настройка проверки пользователей с помощью запроса к базе данных.
+Мы используем источник данных ‘dataSource‘, который задан в application-context.xml
+еще в части, где рассматривалась работа с БД (JDBC). Затем мы записываем в прямую
+запрос SQL, который будет выполнен для проверки пользователя. authentication-manager
+и authentication-provider можно настроить различными способами, здесь просто
+указывается алиас и сервис для проверки аутентификации (jdbc-user-service,
+описанный чуть выше).-->
+    <jdbc-user-service id= "jdbcUserService" data-source-ref= "dataSource"
+                       users-by-username-query= "SELECT USERNAME, PASSWORD, ENABLED FROM USER WHERE USERNAME=?"
+                       authorities-by-username-query= "SELECT U.USERNAME, A.AUTHORITY
+        	 FROM AUTHORITIES A, USER U WHERE U.USERNAME = A.USERNAME AND U.USERNAME = ? "/>
+
+    <authentication-manager alias= "authenticationManager">
+        <authentication-provider user-service-ref= "jdbcUserService"/>
+    </authentication-manager>
+
+
+</beans:beans>
