@@ -16,11 +16,12 @@
        http://www.springframework.org/schema/task
        http://www.springframework.org/schema/task/spring-task.xsd">
 
-<!--    папку config для этих 2-х файлов создаем след образом:
+<!--    папку config для  файлов конфигурации создаем след образом:
 пкм по WEB_INF -> new -> XML Config... file ->
  -> Spring Config -> введем название папки config
- далее указать в Project Structure эти два файла:
-               + Spring + ...-->
+ далее указать в Project Structure эти файлы(через + если не автодетект):
+               + Spring + ...
+               и пометить папку как ресурсы если Идея это сама не сделала-->
 
 
 <!--    Здесь только указан путь к статическим ресурсам(бутстрапу, js, fonts...).
@@ -34,8 +35,9 @@
         <mvc:resources mapping="/resources/**" location="/resources/themeGreen" />
      -->
 
-<!--    Для начала работы с JDBC нам необходимо прописать в этом конфигурационном файле Spring бин для
-        работы с базой данных и источник этих данных.
+<!--    Для начала работы с JDBC или с хибернетом(с entityManagerFactory ниже) нам необходимо прописать в этом
+        конфигурационном файле Spring бин для
+        работы с базой данных dataSource и источник этих данных.
         property-placeholder указывает где нужно искать файл со свойствами (будет приведен чуть ниже).
         Эти свойства используются в описании бина id=dataSource.
          В свойствах указываются стандартные настройки вроде логина, драйвера для работы с БД
@@ -63,8 +65,9 @@
 
 <!--    добавлены бины ‘mailSender‘ и ‘velocityEngine‘. В первом мы
 задаем имя и пароль от вашего почтового сервера (в моем случае это
-логин-пароль от моей почты на Gmail), затем указываются свойства
-smtp сервера. В скобочках с значком доллара используются значения
+логин-пароль(на майле спец пароль для приложений сгенерировал) от моей почты на mail),
+затем указываются свойства smtp сервера.
+В скобочках с значком доллара используются значения
 из utils.properties (описаны в статье spring mvc и jdbc).-->
     <!-- Java Mail Configuration -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -82,7 +85,7 @@ smtp сервера. В скобочках с значком доллара ис
         </property>
     </bean>
 
-    <!-- Velocity Email Template Config Bean подключили форму для ввода самого письма-->
+    <!-- Velocity Email Template Config Bean подключили форму для ввода самого письма?-->
     <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
         <property name="resourceLoaderPath" value="/WEB-INF/email-templates/"/>
     </bean>

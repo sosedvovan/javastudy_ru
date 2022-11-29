@@ -1,3 +1,27 @@
+была ошибка:
+в web.xml не указанно что надо добавить
+<context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            WEB-INF/config/application-context.xml
+            WEB-INF/config/security-config.xml
+        </param-value>
+    </context-param>
+
+    и
+
+ <!--Spring security-->
+    <!-- Need to enable xml config Spring Security -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+------------------------------------------
 Spring MVC и Spring Security. Пример настройки страницы логина, настройка ролей
 Spring MVC и Spring Security. Настройка Spring Security, создание страницы логина,
 настройка ролей, ограничение доступа к частям приложения с помощью аннотаций или

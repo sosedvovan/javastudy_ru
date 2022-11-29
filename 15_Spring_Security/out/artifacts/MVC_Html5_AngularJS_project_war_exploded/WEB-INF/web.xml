@@ -21,6 +21,7 @@ https://metanit.com/java/javaee/4.1.php
         <param-name>contextConfigLocation</param-name>
         <param-value>
             WEB-INF/config/application-context.xml
+            WEB-INF/config/security-config.xml
         </param-value>
     </context-param>
 
@@ -31,6 +32,17 @@ https://metanit.com/java/javaee/4.1.php
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
+
+    <!--Spring security-->
+    <!-- Need to enable xml config Spring Security -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 <!--    сервлета-->
     <servlet>
@@ -94,6 +106,8 @@ http://yoursite.com//WEB-INF/view/index.jsp — первый в списке с�
         <error-code>404</error-code>
         <location>/WEB-INF/view/error/errorpage.jsp</location>
     </error-page>
+
+
     
 </web-app>
 

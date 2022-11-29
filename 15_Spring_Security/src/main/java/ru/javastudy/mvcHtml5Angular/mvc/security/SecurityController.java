@@ -26,6 +26,10 @@ public class SecurityController {
     public ModelAndView adminOrSuperUserCanCall() {
         System.out.println("SecurityController adminOrSuperUserCanCall() is called");
         return new ModelAndView("/security/admin");
+        //если пользователь не аутентифицирован, то он попадет на страницу ввода логина/пароля
+        //если пользователь аутентифицирован, и зайдет на страницу не предназначеную его роли
+        //тогда браузер покажет ошибку: HTTP Status 403 – Forbidden -
+        // - Сервер получил запрос, но отказался его авторизовать
     }
 
     //Spring Security @PreAuthorize — аналогичная по назначению аннотация из Spring Security,
@@ -36,6 +40,10 @@ public class SecurityController {
     public ModelAndView userOrAdminCanCall() {
         System.out.println("SecurityController userOrAdminCanCall() is called with ROLE_ADMIN or ROLE_USER");
         return new ModelAndView("/security/profile");
+        //если пользователь не аутентифицирован, то он попадет на страницу ввода логина/пароля
+        //если пользователь аутентифицирован, и зайдет на страницу не предназначеную его роли
+        //тогда браузер покажет ошибку: HTTP Status 403 – Forbidden -
+        // - Сервер получил запрос, но отказался его авторизовать
     }
 
     //Spring Security @Secured — еще один вариант проверки пользователя на обладание роли
@@ -44,6 +52,10 @@ public class SecurityController {
     public ModelAndView adminMethodSecured() {
         System.out.println("SecurityController adminMethodSecured() is called with ADMIN ROLE");
         return new ModelAndView("/security/admin");
+        //если пользователь не аутентифицирован, то он попадет на страницу ввода логина/пароля
+        //если пользователь аутентифицирован, и зайдет на страницу не предназначеную его роли
+        //тогда браузер покажет ошибку: HTTP Status 403 – Forbidden -
+        // - Сервер получил запрос, но отказался его авторизовать
 
     }
 }
