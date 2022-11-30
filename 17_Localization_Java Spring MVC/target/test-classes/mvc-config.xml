@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security= "http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+	   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+<!--    для локали - нужен ли?-->
+<!--    <mvc:view-controller path="/" view-name="/index"/>-->
+
+
+<!--    включает поиск классов с аннотациями, вроде @Component
+по указанным пакетам.-->
+    <!-- context:component-scan This tag will scan @Component, @Repository, @Service, @Controller
+         and also resolves @Autowired and @Qualifier -->
+    <context:component-scan base-package="ru.javastudy.mvcHtml5Angular.mvc" />
+
+    <!--«включит» наши @Component бины
+        mvc:annotation-driven configures Spring MVC annotations
+        Support for validating @Controller inputs with @Valid, if a JSR-303 Provider is present on the classpath.
+        HttpMessageConverter support for @RequestBody method parameters and @ResponseBody method return values
+        from @RequestMapping or @ExceptionHandler methods.
+     -->
+    <mvc:annotation-driven/>
+
+
+    <!--    Без нее аннотация @Transactional работать не будет в хибернете
+    +добавили в пространство имен <tx...-->
+    <!-- activate @Transactional JPA annotation -->
+    <tx:annotation-driven/>
+
+    <!--org.springframework.web.servlet.PageNotFound.noHandlerFound No mapping found
+    for HTTP request with URI [/jdbcUpdate/user/username/user@javastudy.ru/enabled/resources/css/bootstrap.css]
+     in DispatcherServlet with name 'dispatcherServlet'-->
+    <!--<mvc:default-servlet-handler/>-->
+
+
+<!--    используется при возврате модели из спринг бина.-->
+    <!-- ViewResolver bean config for mapping strings to jsp views -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
+        <property name="order" value="1" />
+        <property name="prefix" value="/WEB-INF/view" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+<!--    Для загрузки файлов нам понадобится прописать в mvc-config.xml
+интерфейс MultipartResolver. Для создания pdf, excel документов был
+добавлен отдельный xml конфигурационный файл и с помощью
+XmlViewResolver был подключен к конфигурации спринг:
+ <mvc:view-controller path="/file.html" view-name="/file/file"/>-->
+    <!-- File Upload bean config-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- set the maximum file size in bytes -->
+        <property name="maxUploadSize" value="1000000"/>
+    </bean>
+
+<!--    закоментить чтобы не ронялись тесты-->
+    <!--Excel and PDF xml view configuration -->
+    <bean class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="order" value="0" />
+        <property name="location">
+            <value>/WEB-INF/config/excel-pdf-config.xml</value>
+        </property>
+    </bean>
+
+<!--view-controller используется в связке с viewResolver
+тк мы исп шаблон бутстрвпа а внутри его страниц ссылки с .html и мы их
+переделываем на .jsp-->
+<!--    это как бы контроллеры когда ссылка ведет
+на файл(в ретурнах контроллеров и гет запросах) а не на обычный урл(на контроллер)-->
+<!--    view-controller — с помощью viewResolver перенаправит пользователя
+перешедшего по ссылке в представление.
+Например для http://localhost:8080/about.html произойдет такой поиск —
+к префиксу (префикс)about.html(суффикс) добавится указанный view-name и добавиться суффикс.
+Т.е. http://localhost:8080/контекст если он задан/WEB-INF/view/about/about.jsp.-->
+    <mvc:view-controller path="/about.html" view-name="/about/about"/>
+    <mvc:view-controller path="/index.html" view-name="/myIndex/index"/>
+    <mvc:view-controller path="/file.html" view-name="/file/file"/>
+    <mvc:view-controller path="/jdbc.html" view-name="/jdbc/jdbc"/>
+    <mvc:view-controller path="/email.html" view-name="/email/email"/>
+    <mvc:view-controller path="/rest.html" view-name="/rest/rest"/>
+    <mvc:view-controller path="/orm.html" view-name="/orm/orm"/>
+    <mvc:view-controller path="/exception.html" view-name="/error/exception"/>
+    <mvc:view-controller path="/jstl.html" view-name="/jstl/jstl"/>
+    <mvc:view-controller path="/scope.html" view-name="/scope/scope"/>
+    <mvc:view-controller path="/cookieView.html" view-name="/cookie/cookieView"/>
+    <mvc:view-controller path="/security.html" view-name="/security/security"/>
+    <mvc:view-controller path="/security/admin.html" view-name="/security/admin"/>
+    <mvc:view-controller path="/login.html" view-name="/form/login"/>
+    <mvc:view-controller path="/" view-name="/index"/>
+
+<!--    тоже есть и в апликайшен-контексте-->
+    <!-- Static Resources Configuration (get access to static sources such as CSS and JavaScript files) -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <!-- themes can be put in different folder such as
+        <mvc:resources mapping="/resources/**" location="/resources/themeBlue" />
+        <mvc:resources mapping="/resources/**" location="/resources/themeGreen" />
+     -->
+
+<!--    Здесь приведена простенькая настройка одного перехватчика. Сначала
+задается общий тег <interceptors /> внутри которого необходимо перечислить
+все необходимые перехватчики. В нашем случае задан один перехватчик, а так же его
+маппинг (/interceptorCall/*). Так же указан класс перехватчик, который должен
+реагировать при перехвате запроса, соответствующему URI.  В комментариях в
+коде обращаю внимание, что для обработки всех запросов необходимо использовать
+две звездочки, а не одну.-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/interceptorCall/*"/>
+            <!--need to use ' /** ' not ' /* ' if you want to intercept all requests.-->
+            <!--<mvc:mapping path="/**"/>-->
+            <bean class="ru.javastudy.mvcHtml5Angular.mvc.interceptors.SiteInterceptor"/>
+        </mvc:interceptor>
+
+<!--        Смена локализации в приложении будет реализована с помощью перехватчика
+LocaleChangeInterceptor (описание работы и настройки перехватчиков читайте в
+соответствующей статье в обзоре приложения)-->
+        <mvc:interceptor>
+            <mvc:mapping path="/*" />
+            <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+                <property name="paramName" value="languageVar" />
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+<!-- для локализации
+необходимо добавить два бина — localeResolver и messageSource. Первый
+необходим для определения локали приложения, а второй для настройки файла с
+текстом на разных языках. В приложении указанном по ссылке в начале статьи
+использовался класс SessionLocaleResolver, здесь мы будем использовать другой
+подход — CookieLocaleResolver. Названия классов поясняют разницу между этими
+подходами по определению локали-->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="ru" />
+        <!-- cookieMaxAge in seconds. if you set it to -1, the cookie will be deleted when browser is closed) -->
+        <property name="cookieMaxAge" value="100000"/>
+    </bean>
+
+    <!-- MessageSource ReloadableResourceBundleMessageSource configuration -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames" value="classpath:/locales/messages,classpath:util"/>
+<!--        <property name="basenames" value="WEB-INF/locales/messages"/>-->
+        <property name="cacheSeconds" value="1"/>
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+<!--Разберем по отдельности код выше. Перехватчик LocaleChangeInterceptor будет
+срабатывать на любой URI в нашем приложении (/*). Далее указывается имя параметра,
+который мы будем использовать в приложении. Его назначение будет понятнее далее по
+тексту.
+В бине localeResolver мы указываем локаль по умолчанию (в нашем случае Ru), которая
+будет включаться, если в куках нет никакой информации о пришедшем пользователе
+(и например настройках браузера). Так же указывается срок жизни куки. Если вы хотите,
+чтобы они удалялись после закрытия браузера, то необходимо выставить значение -1.
+Для бина messageSource задаем путь по умолчанию для файла с «источником сообщений»,
+время кеша HTTP заголовков и кодировку по умолчанию.-->
+
+
+
+
+
+
+<!--    была добавлена одна строчка (а так же пространство имен spring-security.xsd) для того,
+чтобы заработали аннотации Spring Security в Java классах.
+security: — пространство имен Spring Security, которое задается в начале файла.
+global-method-security — предоставляет методы безопасности для всех бинов, зарегистрированных в контексте
+Spring приложения. В частности, бины будут проверяться на наличие совпадений с упорядоченным списком дочерних
+элементов protect-pointcut и\или аннотаций Spring Security. Подробнее в документации или в справке IDEA (ctrl+q).
+secured-annotations, jsr250-annotations — включение аннотаций из соответствующих библиотек-->
+    <!--Spring security enabled annotations-->
+    <security:global-method-security pre-post-annotations= "enabled" secured-annotations= "enabled" jsr250-annotations= "enabled"/>
+
+
+
+
+    <!--
+            mvc:annotation-driven configures Spring MVC annotations
+            Support for validating @Controller inputs with @Valid, if a JSR-303 Provider is present on the classpath.
+            HttpMessageConverter support for @RequestBody method parameters and @ResponseBody method return values
+            from @RequestMapping or @ExceptionHandler methods.
+         -->
+<!--    настройка mvc:message-converters, в которой задан бин MappingJackson2HttpMessageConverter с атрибутом prettyPrint. Этот бин
+и атрибут позволяет получать JSON ответ в форматированном виде (легче читается человеком)
+-->
+    <mvc:annotation-driven>
+        <!--use int RestController to produce pretty json response-->
+        <mvc:message-converters>
+            <bean id="jacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="prettyPrint" value="true" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+
+
+</beans>
