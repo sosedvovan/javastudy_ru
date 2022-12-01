@@ -1,0 +1,31 @@
+AngularJS Hello world example. Основы AngularJS: модуль, контроллер, выражения
+AngularJS Hello world example. Основы AngularJS. Подключение и настройка фреймворка.
+Понятия приложения, модуля, контроллера и выражений в AngularJS.
+
+Обзор приложения Spring MVC + AngularJS + Bootstrap + HTML5
+Используемые технологии и библиотеки
+Spring MVC 4.2.4.Release
+AngularJS 1.5.0
+IntelliJ IDEA 15.0.2
+1. Описание задачи
+Познакомиться с фреймворком AngularJS — написать простую
+Hello World jsp страницу с использованием возможностей AngularJS.
+ Подключить angular.js, ознакомиться с понятиями контроллера
+ (ng-controller), приложения (ng-app), модуля (angular.module).
+  Рассмотреть применение выражений (expressions).
+
+  В веб ресурсах добавлен пакет resources\angularjs с js
+  файлами angular. Рассматриваемые в статье понятия написаны
+  в пакете view\angularjs (expressions.jsp).
+  angularindex.jsp — содержание доступных тем по AngularJS.
+   Описание AngularJS
+  AngularJS на 100% написанный на JavaScript client side фреймворк
+  Это бесплатный open source проект
+  AngularJS можно запускать как на мобильных так и на стационарный устройствах
+  Использует концепцию MVC (models, views, controllers)
+  Предоставляет удобный для сопровождения и юнит тестирования код
+  Использует Dependency Injection (DI) принцип для внедрения зависимостей компонентов
+  Расширяет HTML DOM модель с помощью добавления атрибутов к HTML тэгам
+  Позволяет создавать пользовательские интерфейсы с широкими возможностями
+  Официально поддерживается компанией Google
+  Использует квадратные скобки с префиксом ng (отсылка к Angular)
