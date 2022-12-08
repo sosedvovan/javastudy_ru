@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@tag description="Template Site tag" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@attribute name="title" fragment="true" %>
@@ -27,21 +28,14 @@
     <spring:url value="/resources/js/bootstrap.min.js" var="js"/>
     <script src="${js}"></script>
 
-<%--    Подключение angular.js
-Для того, чтобы начать работать с AngularJS в нашем Spring MVC приложении
-необходимо добавить JavaScript файлы Angular. Для подключения фреймворка была
-добавлена следующая запись в <head> </head> нашего приложения (напомню, что
-приложение использует шаблонный код для header, который добавляется на каждую
-страницу.) Шаблон header для всего раздела по Angular использует
-файл — angular-template.tag в пакете tags.
-Теперь при загрузке страницы будет подгружаться angular.min.js файл.
-Скачать его можно на официальном сайте Angularjs.org. Это всё, что необходимо
-для начала использования AngularJS на нашей jsp странице.--%>
     <!-- AngularJS min production framework -->
     <spring:url value="/resources/angularjs/angular.min.js" var="angularjs" />
     <script src="${angularjs}"></script>
 
-
+<%--Для использования маршрутизации (routing) нужно подключить
+angular-route.min.js и angular-resource.min.js. Они были подключены
+сразу в начале обзора AngularJS в шаблоне header’а angular-temaplate.tag.
+Это было сделано с помощью импорта js файлов.--%>
     <!-- AngularJS min production routing framework -->
     <spring:url value="/resources/angularjs/angular-route.min.js" var="angularroute" />
     <script src="${angularroute}"></script>
@@ -65,7 +59,7 @@
             <div class="col-lg-12">
                 <a href="<%=request.getContextPath()%>?languageVar=en">EN</a>
                 <a href="<%=request.getContextPath()%>?languageVar=ru">RU</a>
-                <p>Copyright � Javastudy.ru 2016</p>
+                <p>Copyright © Javastudy.ru 2016</p>
             </div>
         </div>
     </footer>

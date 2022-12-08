@@ -65,7 +65,7 @@ document.getElementById("resultParse").innerHTML = simpleObjectParsed.title;
                 };
                 //объект переводим в строку JSON(возможно с заменой значений, если указана функция замены)
                 var jsonSimpleObject = JSON.stringify(simpleObject, null, 0); //1 - space pretty print
-                //строку JSON разбираем в обычный собъект(возможно с преобразованием получаемого)
+                //строку JSON разбираем в обычный объект(возможно с преобразованием получаемого)
                 var simpleObjectParsed = JSON.parse(jsonSimpleObject);
                 //делаем внутренние HTML переменные для тега <pre><code id="resultParse"></pre>
                 document.getElementById("resultStringify").innerHTML = jsonSimpleObject;
@@ -144,7 +144,8 @@ document.getElementById('resultObjectArray').innerHTML = arrayObjects.innerObjec
                 var jsonArrayObjects = JSON.stringify(arrayObjects, null, 1);
                 //покажем JSON всего объекта в <pre>
                 document.getElementById('resultJsonArrayObjects').innerHTML = jsonArrayObjects;
-                //у объекта обратимся к его полю-массиву и возьмем 1-й элемент
+                //у объекта обратимся к его полю-массиву и возьмем у 1-ого элемента
+                // возьмем значение по ключю name
                 document.getElementById('resultObjectArray').innerHTML = arrayObjects.innerObjects[1].name;
             </script>
             <pre>

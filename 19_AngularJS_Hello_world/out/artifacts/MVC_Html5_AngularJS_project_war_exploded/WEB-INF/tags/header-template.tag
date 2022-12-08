@@ -16,9 +16,27 @@
 <c:url value="/scope.html" var="scope" />
 <c:url value="/cookie.html" var="cookieView" />
 <c:url value="/security.html" var="security" />
+
+<c:url value="/html5.html" var="html5" />
+
 <c:url value="/angularIndex.html" var="angularIndex" />
 <c:url value="/angularjson.html" var="angularjson" />
 <c:url value="/expressions.html" var="expressions" />
+<c:url value="/ng-bind-model.html" var="ngbindmodel" />
+<c:url value="/ng-class.html" var="ngclass" />
+<c:url value="/ng-click-show.html" var="ngclickshow" />
+<c:url value="/ng-if-switch.html" var="ngifswitch" />
+<c:url value="/ng-init.html" var="nginit" />
+<c:url value="/ng-repeat.html" var="ngrepeat" />
+<c:url value="/two-way-binding.html" var="twowaybinding" />
+<c:url value="/angularDI.html" var="angularDI" />
+<c:url value="/ng-controller.html" var="ngcontroller" />
+<c:url value="/angularfilters.html" var="angularfilters" />
+<c:url value="/angularvalidation.html" var="angularvalidation" />
+<c:url value="/angularrouting.html" var="angularrouting" />
+<c:url value="/angularhttpresource.html" var="angularhttpresource" />
+<c:url value="/customdirective.html" var="customdirective" />
+
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -99,6 +117,9 @@
                         <li>
                             <a href="${security}">Spring Security</a>
                         </li>
+                        <li>
+                            <a href="${html5}">HTML5</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -113,11 +134,53 @@
                         <li>
                             <a href="${expressions}">AngularJS Expressions</a>
                         </li>
+                        <li>
+                            <a href="${ngbindmodel}">AngularJS bind and model</a>
+                        </li>
+                        <li>
+                            <a href="${ngclass}">AngularJS ng-class</a>
+                        </li>
+                        <li>
+                            <a href="${ngclickshow}">AngularJS ng-click, ng-show</a>
+                        </li>
+                        <li>
+                            <a href="${ngifswitch}">AngularJS ng-if, ng-switch</a>
+                        </li>
+                        <li>
+                            <a href="${nginit}">AngularJS ng-init</a>
+                        </li>
+                        <li>
+                            <a href="${ngrepeat}">AngularJS ng-repeat</a>
+                        </li>
+                        <li>
+                            <a href="${twowaybinding}">AngularJS two way binding</a>
+                        </li>
+                        <li>
+                            <a href="${angularDI}">AngularJS Dependency Injection</a>
+                        </li>
+                        <li>
+                            <a href="${ngcontroller}">AngularJS Controllers</a>
+                        </li>
+                        <li>
+                            <a href="${angularfilters}">AngularJS Filters</a>
+                        </li>
+                        <li>
+                            <a href="${angularvalidation}">AngularJS from validation</a>
+                        </li>
+                        <li>
+                            <a href="${angularrouting}">AngularJS routing and templates</a>
+                        </li>
+                        <li>
+                            <a href="${angularhttpresource}">AngularJS http resource</a>
+                        </li>
+                        <li>
+                            <a href="${customdirective}">AngularJS custom directive</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
+
     </div>
     <!-- /.container -->
 </nav>

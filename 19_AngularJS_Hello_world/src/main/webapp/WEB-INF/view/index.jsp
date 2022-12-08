@@ -6,7 +6,7 @@
 <%@ taglib prefix="page" tagdir="/WEB-INF/tags" %>
 
 
-
+<%--все что на этой странице вставить в template.tag--%>
 <page:template>
 
   <jsp:attribute name="title">MVC with HTML5, AngularJS and Bootstrap</jsp:attribute>

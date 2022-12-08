@@ -126,5 +126,16 @@ public class RestTemplateController {
         System.out.println("@RestTemplateControllerExample handleException");
         System.out.println(ex);
     }
+
+    //JSON SAVES a post. Uses in angularjs/httpresource.jsp
+    @RequestMapping(value = "/rest/savePost", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void savePost(@RequestBody RestPostsModel postJSON) {
+        System.out.println("savePost postJSON.getUserId(): " + postJSON.getUserId());
+        System.out.println("savePost postJSON.getTitle(): " + postJSON.getTitle());
+        System.out.println("savePost postJSON.getId(): " + postJSON.getId());
+        System.out.println("savePost postJSON.getBody(): " + postJSON.getBody());
+        System.out.println("@RestTemplateControllerExample savePost is called");
+    }
 }
 
